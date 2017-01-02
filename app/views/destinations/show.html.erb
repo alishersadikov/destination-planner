@@ -19,7 +19,25 @@
 
   <div class="row">
     <h4>Forecast for <%= @destination.name %>:</h4>
-    
+    <% @forecasts.each do |forecast| %>
+    <div class="col-md-6">
+
+      <table class="table">
+        <tr>
+          <th>Date:</th>
+          <th>High:</th>
+          <th>Low:</th>
+          <th>Conditions:</th>
+        </tr>
+        <tr>
+          <td><%= forecast.date %></td>
+          <td><%= forecast.high %></td>
+          <td><%= forecast.low %></td>
+          <td><%= forecast.conditions %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
   </div>
 
   <div class="row">
