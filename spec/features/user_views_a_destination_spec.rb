@@ -2,25 +2,27 @@ require 'rails_helper'
 
 feature "user clicks a specific destination" do
   it "sees destination info and 10 day weather forecast" do
+    VCR.use_cassette("forecasts") do
 
-    destination = Destination.create(
-                              name: "Denver", zip: "80246", description: "great city",
-                              image_url: "https://placehold.it/300x300.png/000")
-    visit "/"
+      destination = Destination.create(
+                                name: "Denver", zip: "80246", description: "great city",
+                                image_url: "https://placehold.it/300x300.png/000")
+      visit "/"
 
-    expect(page).to have_content(destination.name)
+      expect(page).to have_content(destination.name)
 
-    find(:xpath, "//a/img[@alt='000']/..").click
+      find(:xpath, "//a/img[@alt='000']/..").click
 
-    expect(current_path).to eq(destination_path(destination))
-    expect(page).to have_content(destination.name)
-    expect(page).to have_content(destination.zip)
-    expect(page).to have_content(destination.description)
-    # expect(page).to have_content(destination.name)
+      expect(current_path).to eq(destination_path(destination))
+      expect(page).to have_content(destination.name)
+      expect(page).to have_content(destination.zip)
+      expect(page).to have_content(destination.description)
+      # expect(page).to have_content(destination.name)
 
-    # expect(page).to have_image(destination.image_url)
-    # click_link destination.image_url
-    #
+      # expect(page).to have_image(destination.image_url)
+      # click_link destination.image_url
+      #
+    end
   end
 end
 
