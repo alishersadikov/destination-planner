@@ -7,4 +7,11 @@ class Forecast
     @low = raw_data[:low][:fahrenheit]
     @conditions = raw_data[:conditions]
   end
+
+  def self.build_forecasts(zipcode)
+    raw_forecasts = WundergroundService.new(zipcode).forecasts_by_zipcode
+    raw_forecasts.map do |forecast|
+      Forecast.new(forecast)
+    end
+  end
 end
