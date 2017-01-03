@@ -10,8 +10,6 @@ class Forecast
 
   def self.build_forecasts(zipcode)
     raw_forecasts = WundergroundService.new(zipcode).forecasts_by_zipcode
-    raw_forecasts.map do |forecast|
-      Forecast.new(forecast)
-    end
+    raw_forecasts.map { |forecast|  Forecast.new(forecast) }
   end
 end
