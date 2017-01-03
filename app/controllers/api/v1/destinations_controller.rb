@@ -25,6 +25,11 @@ class Api::V1::DestinationsController < ApplicationController
     end
   end
 
+  def destroy
+    destination = Destination.find(params[:id])
+    destination.destroy
+  end
+
   private
 
   def destination_params

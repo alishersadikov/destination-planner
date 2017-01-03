@@ -65,4 +65,17 @@ describe "destinations endpoints" do
       expect(result['zip']).to eq("66204")
     end
   end
+
+  context "DELETE /destinations/:id" do
+    it "udpates a destination" do
+      destination = Destination.create(name: "Phoenix", zip: "85001", description: "beautiful city", image_url: "https://placehold.it/300x300.png/000")
+
+      expect(Destination.last.name).to eq("Phoenix")
+
+      delete "/api/v1/destinations/#{destination.id}"
+
+      expect(response).to be_success
+      expect(Destination.find_by(name: "Phoenix")).to be_nil
+    end
+  end
 end
