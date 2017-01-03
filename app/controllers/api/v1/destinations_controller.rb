@@ -7,16 +7,21 @@ class Api::V1::DestinationsController < ApplicationController
     render json: Destination.find(params[:id])
   end
 
-  def new
-    @destination = Destination.new
-  end
-
   def create
     destination = Destination.new(destination_params)
     if destination.save
       render json: destination
     else
       render json: { message: "Failed to create destination."}
+    end
+  end
+
+  def update
+    destination = Destination.find(params[:id])
+    if destination.update(destination_params)
+      render json: destination
+    else
+      render json: { message: "Failed to update destination."}
     end
   end
 

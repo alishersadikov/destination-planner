@@ -48,4 +48,21 @@ describe "destinations endpoints" do
       expect(result['description']).to eq("beautiful city")
     end
   end
+  context "PUT /destinations/:id" do
+    it "udpates a destination" do
+      destination = Destination.create(name: "Phoenix", zip: "85001", description: "beautiful city", image_url: "https://placehold.it/300x300.png/000")
+
+      headers = { "CONTENT-TYPE" => "application/json" }
+      params = { name: "Kansas City", zip: "66204", description: "beautiful city", image_url: "https://placehold.it/300x300.png/000" }.to_json
+
+      put "/api/v1/destinations/#{destination.id}", params, headers
+
+      result = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(Destination.last.name).to eq("Kansas City")
+      expect(result['name']).to eq("Kansas City")
+      expect(result['zip']).to eq("66204")
+    end
+  end
 end
