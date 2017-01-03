@@ -16,4 +16,18 @@ describe "destinations endpoints" do
       expect(destinations.last[:name]).to eq(destination_2.name)
     end
   end
+
+  context "GET /destinations/1" do
+    it "returns the specific destination" do
+      destination = Destination.create(name: "Denver", zip: "80246", description: "great city", image_url: "https://placehold.it/300x300.png/000")
+
+      get "/api/v1/destinations/#{destination.id}"
+
+      json_destination = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to be_success
+      expect(json_destination[:name]).to eq(destination.name)
+      expect(json_destination[:description]).to eq(destination.description)
+    end
+  end
 end
