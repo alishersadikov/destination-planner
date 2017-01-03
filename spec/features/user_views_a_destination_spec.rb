@@ -30,13 +30,3 @@ feature "user clicks a specific destination" do
     end
   end
 end
-
-# /html/body/div/img
-# <img src="https://placehold.it/300x300.png/000" alt="000">
-# As a user
-# When I visit "/"
-# And I click on a destination
-# Then I should be on page "/destinations/:id"
-# Then I should see the destination's name, zipcode, description, and 10 day weather forecast
-# The weather forecast is specific to the destination whose page I'm on
-# The forecast should include date (weekday, month and day), high and low temps (F), and weather conditions

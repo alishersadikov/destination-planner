@@ -30,4 +30,22 @@ describe "destinations endpoints" do
       expect(json_destination[:description]).to eq(destination.description)
     end
   end
+
+  context "POST /destinations" do
+    it "creates a destination" do
+      headers = { "CONTENT-TYPE" => "application/json" }
+      params = { name: "Phoenix", zip: "85001", description: "beautiful city", image_url: "https://placehold.it/300x300.png/000" }.to_json
+
+      post "/api/v1/destinations", params, headers
+
+      result = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(Destination.last.name).to eq("Phoenix")
+      expect(result['name']).to eq("Phoenix")
+      expect(result['image_url']).to eq("https://placehold.it/300x300.png/000")
+      expect(result['zip']).to eq("85001")
+      expect(result['description']).to eq("beautiful city")
+    end
+  end
 end
